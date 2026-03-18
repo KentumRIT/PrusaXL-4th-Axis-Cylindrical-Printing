@@ -12,11 +12,13 @@ We need some way of controlling the 4th axis (θ axis) motor that will drive the
   - "Description" is just a brief description of the solution.
   - "Benefits" refers to pros inherent to the presented solution that will persist no matter the answers chosen for the solutions' challenges.
   - "Drawbacks" refers to cons inherent to the presented solution that are not changeable within the scope of the solution.
-  - "Challenges" refers to foreseen cons of the presented solution that are potentially solvable. Challenges have the following markings:
-    - **[Solved]** describes challenges which have been completely solved and no longer pose any issue.
-    - **[Mitigated]** describes challenges for which an answer has been found that only partially solves the issues.
-    - **[In Progress]** describes challenges that are not solved and are currently being worked on.
-    - **[Unsolved]** describes challenges that haven't been solved and aren't yet being worked on.
+  - "Challenges" refers to foreseen cons of the presented solution that are potentially solvable. 
+    - Challenges have the following markings:
+      - **[Solved]** describes challenges which have been completely solved and no longer pose any issue.
+      - **[Mitigated]** describes challenges for which an answer has been found that only partially solves the issues.
+      - **[In Progress]** describes challenges that are not solved and are currently being worked on.
+      - **[Unsolved]** describes challenges that haven't been solved and aren't yet being worked on.
+    - Challenges in the **[Solved]**, **[Mitigated]**, or **[Unsolved]** states should be linked to a doc or folder containing documentation of the decisions made and work done.
 
 ## Switching Z and θ axes
 ### Description
@@ -40,8 +42,7 @@ The PrusaXL firmware/hardware can already handle controlling XYZ steppers simult
 - **[In Progress]** When the θ and Z axes are unpowered they may accumulate positional error.
   - The Prusa microsteps its motors, so when they lose power they'll at least *want* to fall to the closest full-step position. With at least one Z/θ switch per layer and potentially hundreds of layers per part, this error may accumulate over time.
   - Friction in the Z/θ axes may prevent this error, but adding extra friction for the sake of it seems like a bad idea.
-- **[Solved]** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
-  - `M84 Z` and `M17` can be used to disable the Z axis motors and reenable all steppers respectively. This allows the Z axis motors to be unpowered when they're switched.
+- **[Solved](https://github.com/KentumRIT/PrusaXL-4th-Axis-Cylindrical-Printing/blob/main/4th-Axis-Control/Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching.md)** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
 - **[Unsolved]** We need to match the system characteristics of the θ to the Z axis so that the Z axis motor driver tuning works for both the Z and θ axes.
 - **[Unsolved]** It's possible the Z axis drive controller doesn't have enough power for the θ axis.
 - **[Unsolved]** We need to find the relationship between Z axis movement to θ axis movement.
