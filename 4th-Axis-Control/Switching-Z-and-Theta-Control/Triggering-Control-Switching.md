@@ -1,5 +1,5 @@
 # Goal
-I need a way of triggering the switch between Z and θ control.
+I need a way of triggering the switch between Z and θ control via G-code, as that's the only way the slicer can interact with the printer.
 
 # Potential Solutions
 ## Use serial data with an external microcontroller
