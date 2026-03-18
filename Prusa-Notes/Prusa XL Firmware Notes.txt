@@ -1,0 +1,28 @@
+"T" Gcode function defined in Marlin Control
+https://github.com/prusa3d/Prusa-Firmware-Buddy/blob/master/lib/Marlin/Marlin/src/gcode/control/T.cpp
+- includes "../../module/prusa/toolchanger.h" for prusas with a toolchanger
+- relies on tool_change() function from "../../module/tool_change.h"
+
+tool_change function defined in Marlin:
+https://github.com/prusa3d/Prusa-Firmware-Buddy/blob/master/lib/Marlin/Marlin/src/module/tool_change.cpp
+ - multiple tool change functions defined, need to figure out which the XL uses
+	#if ENABLED(DUAL_X_CARRIAGE)
+        dualx_tool_change(new_tool, no_move);
+      	#elif ENABLED(PARKING_EXTRUDER)                                   // Dual Parking extruder
+        parking_extruder_tool_change(new_tool, no_move);
+      	#elif ENABLED(MAGNETIC_PARKING_EXTRUDER)                          // Magnetic Parking extruder
+        magnetic_parking_extruder_tool_change(new_tool);
+      	#elif ENABLED(SWITCHING_TOOLHEAD)                                 // Switching Toolhead
+        switching_toolhead_tool_change(new_tool, no_move);
+     	#elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)                        // Magnetic Switching Toolhead
+        magnetic_switching_toolhead_tool_change(new_tool, no_move);
+      	#elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)                 // Magnetic Switching ToolChanger
+        em_switching_toolhead_tool_change(new_tool, no_move);
+
+G0/G1 gcode functions defined:
+https://github.com/prusa3d/Prusa-Firmware-Buddy/blob/master/lib/Marlin/Marlin/src/gcode/motion/G0_G1.cpp
+Relies on:
+ - get_destination_from_command() from "../gcode.h" defined: https://github.com/prusa3d/Prusa-Firmware-Buddy/blob/b91eeda0c16a9931126ea065f2fa2bcc8a983b8d/lib/Marlin/Marlin/src/gcode/gcode.cpp
+ - prepare_move_to_destination() from "../../module/motion.h"
+ - TERN_()
+ - report_current_grblstate_moving()

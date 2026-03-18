@@ -1,0 +1,2 @@
+Mandrel tall-side blocks X motion at X>299
+First (front-most) mandrel at Y=12.6 (previously 13) (center) Z=28.5 (top) X = 175 (center)
