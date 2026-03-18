@@ -34,15 +34,9 @@ The PrusaXL firmware/hardware can already handle controlling XYZ steppers simult
 - Both Z and θ axes become unpowered at some point during printing.
 
 ### Challenges
-- **[In Progress](Switching-Z-and-Theta-Control/Triggering-Control-Switching.md)** We need to trigger switching between Z and θ axis control via G-code.
-  - I searched for a while to try and find a G-code command that could be used to control the switching behavior but couldn't find a simple toggleable digital signal that could be easily hijacked for this purpose. 
-  - I've landed at using the `M118` command to send a Serial signal out to an external microcontroller. The microcontroller will then control the switching behavior.
-    - I verified that my laptop receives the serial data from `M118` via the USB-C port on the XL Buddy board.  
-    - I've yet to test that the ESP32 can receive this serial data itself. I'm not sure that the Prusa can natively recognize the UART bridge that the ESP32 uses for USB communication.
-- **[In Progress](Switching-Z-and-Theta-Control/Testing-Z-Repeatability-With-Interrupted-Motor-Power.md)** When the θ and Z axes are unpowered they may accumulate positional error.
-  - The Prusa microsteps its motors, so when they lose power they'll at least *want* to fall to the closest full-step position. With at least one Z/θ switch per layer and potentially hundreds of layers per part, this error may accumulate over time.
-  - Friction in the Z/θ axes may prevent this error, but adding extra friction for the sake of it seems like a bad idea.
-- **[Solved](Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching.md)** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
+- **[In Progress](Switching-Z-and-Theta-Control/Prusa-Switching-Control/journal.md)** We need to trigger switching between Z and θ axis control via G-code.
+- **[In Progress](Switching-Z-and-Theta-Control/Testing-Z-Repeatability/journal.md)** When the θ and Z axes are unpowered they may accumulate positional error.
+- **[Solved](Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching/journal.md)** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
 - **[Unsolved]** We need to match the system characteristics of the θ to the Z axis so that the Z axis motor driver tuning works for both the Z and θ axes.
 - **[Unsolved]** It's possible the Z axis drive controller doesn't have enough power for the θ axis.
 - **[Unsolved]** We need to find the relationship between Z axis movement to θ axis movement.
