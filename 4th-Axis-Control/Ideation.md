@@ -42,7 +42,7 @@ The PrusaXL firmware/hardware can already handle controlling XYZ steppers simult
 - **[In Progress]** When the θ and Z axes are unpowered they may accumulate positional error.
   - The Prusa microsteps its motors, so when they lose power they'll at least *want* to fall to the closest full-step position. With at least one Z/θ switch per layer and potentially hundreds of layers per part, this error may accumulate over time.
   - Friction in the Z/θ axes may prevent this error, but adding extra friction for the sake of it seems like a bad idea.
-- **[Solved](https://github.com/KentumRIT/PrusaXL-4th-Axis-Cylindrical-Printing/blob/main/4th-Axis-Control/Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching.md)** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
+- **[Solved](Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching.md)** When the Z/θ axes motors are unpowered they may cause large negative voltage spikes via magnetic field collapse.
 - **[Unsolved]** We need to match the system characteristics of the θ to the Z axis so that the Z axis motor driver tuning works for both the Z and θ axes.
 - **[Unsolved]** It's possible the Z axis drive controller doesn't have enough power for the θ axis.
 - **[Unsolved]** We need to find the relationship between Z axis movement to θ axis movement.
