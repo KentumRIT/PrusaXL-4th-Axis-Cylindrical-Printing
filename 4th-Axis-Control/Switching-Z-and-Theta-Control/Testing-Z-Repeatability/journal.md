@@ -20,7 +20,7 @@ TODO: Measure control samples
 ### Test samples
 I printed test samples with modified G-code: `M84 Z` and `M17` were added to bracket each perimeter, external perimeter, infill, and solid infill print sequence such all movements during printing would have inactive Z-axis motors. The code I used for this modification can be found [here].
 
-I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. My theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I modified the [G-code used](/Disabling-Motors-for-Switching/Z Disable Enable Test.gcode) to test if `M84` and `M17` were working to be the following repeated section
+I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. My theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I modified the [G-code used](4th-Axis-Control/Switching-Z-and-Theta-Control/Disabling-Motors-for-Switching/Z Disable Enable Test.gcode) to test if `M84` and `M17` were working to be the following repeated section
 ```
 M84 Z
 G4 P1000
