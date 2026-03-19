@@ -18,7 +18,7 @@ I printed a set of 5 towers with standard Prusa G-code. The print settings were 
 TODO: Measure control samples
 
 ### Test samples
-I printed test samples with modified G-code: `M84 Z` and `M17` were added to bracket each perimeter, external perimeter, infill, and solid infill print sequence such all movements during printing would have inactive Z-axis motors. The code I used for this modification can be found [here](70mm%test%tower.gcode), with an example snippet here:
+I printed test samples with modified G-code: `M84 Z` and `M17` were added to bracket each perimeter, external perimeter, infill, and solid infill print sequence such all movements during printing would have inactive Z-axis motors, with an example snippet here:
 ```
 M84 Z
 ;TYPE:Perimeter
@@ -44,25 +44,8 @@ G1 E-.64 F2100
 M17
 ```
 
-I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. Power was being delivered to the Z axis motor during printing (after the `M84 Z` G-code command). My initial theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I created G-code that moves the extruder in a square pattern and turns off the Z axis between moves with a 1s delay added between each command:
-```
-M84 Z
-G4 P1000
-G1 X25 Y25
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X45 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-```
-If `G0/G1` does actually enable all steppers, then the above code should disable the Z motors, wait 1s, enable the Z motors, then wait 1s repeatedly. However, the Z axis motor remains powered off for the entire section, which implies that `G1 X Y` isn't sufficient to cause the Z motor to turn back on. The only obvious differences then between the code snippet above from the test sample G-code and the test code I ran are the inclusion of `G1 F`, `G1 E`, and `M204` commands. I included these in the updated [G-code](Z%Enable%Via%G1.gcode).
+I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. Power was being delivered to the Z axis motor during printing (after the `M84 Z` G-code command). My initial theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I ran the above code snippet in [this G-code](Z%Enable%Via%G1.gcode) and made small changes until I found the issue was that I need a dwell before the `M17` command. Interestingly, the ammount of time the dwell lasts doesn't seem to matter, so even a 1ms delay of `G4 P1` is sufficient. I guess the G-code keeps executing past the current `G1` command until it finds the `M17` command and runs `M17` only milliseconds after it runs `M84 Z`, but adding the dwell term blocks that behavior. I updated the script that inserts the `M84 Z` and `M17` commands to include `G4 P1` before each to fix this behavior and then re-printed the test samples with the edited G-code.
+
+Again, I monitored the Z axis motor during printing to ensure it was properly being disabled during printing and properly enabling for wipe moves and layer changes. It was not of course, because that would be way too easy. I tried now including `M400` "wait for moves" before every `M84 Z` and `M17` command as well as increasing the delay from 1ms to 100ms as well as adding a 100ms delay *after* the commands in addition to the one before. This also didn't work, so I tried just getting rid of all the `M17` commands. This did not work.
+
+Given that when I remove the start G-code from the equation, the first layer code works fine, I think that there's likely a setting or something in the first layer that needs to be changed for this to work. I'll focus on that next.

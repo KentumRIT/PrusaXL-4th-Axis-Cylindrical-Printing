@@ -42,81 +42,67 @@ M572 S0.03		; set extruder pressure advance
 M142 S36		; set cooler temperature and don't wait
 M107			; turn off print cooling fan
 
-G1 X25 Y25
+; home XY
+G28 XY
 
-; Disable, then enable Z axis repeatedly
+; Section from 70mm test tower_edited from layer 1 first M84 Z to first M17 with pauses included after M84Z and M17
+; Below is a list of edits made in chronological order (least to most recent)
+; removed all comments from block
+; removed all F terms from G1 commands
+; removed all M204 commands
+; removed all E terms from G1 commands
+; added 1s delay between G1 section and M17 command, the first thing that worked
+; changed 1s delay to 1ms delay, still worked
+; reverted code to original format, with the addition of a 1ms dwell before M17 command
+; copied a larger section of code, all the way back to layer change, still worked
+;LAYER_CHANGE
+;Z:0.2
+;HEIGHT:0.2
+G1 Z.8 F720
+M486 S2
+G1 X61.593 Y331.593 F24000
+G1 Z.2 F720
+G1 E.8 F1500
+M204 P500
+G4 P1
 M84 Z
-G4 P1000
-G1 X25 Y25
-G4 P1000
+;TYPE:Perimeter
+;WIDTH:0.499999
+G1 F2400
+G1 X28.407 Y331.593 E1.26128
+G1 X28.407 Y298.407 E1.26128
+G1 X61.593 Y298.407 E1.26128
+G1 X61.593 Y331.533 E1.259
+M204 P2500
+M204 T250
+G1 X62.05 Y332.05 F24000
+M204 T5000
+M204 P500
+;TYPE:External perimeter
+G1 F2400
+G1 X27.95 Y332.05 E1.29601
+G1 X27.95 Y297.95 E1.29601
+G1 X62.05 Y297.95 E1.29601
+G1 X62.05 Y331.99 E1.29373
+M204 P2500
+G1 E-.64 F2100
+G4 P1
+M17
+;WIPE_START
+G1 F19200
+G1 X62.05 Y332.05 E-.00623
+G1 X60.57 Y332.05 E-.15377
+;WIPE_END
+G1 X61.097 Y311.647 Z.556 F24000
+G1 X61.241 Y306.063 Z.644
+G1 X61.385 Y300.479 Z.712
+G1 X61.41 Y299.52 Z.722
+G1 Z.2 F720
+G1 E.8 F1500
+M204 P500
+G4 P1
 M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X45 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y25
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X45 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y25
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X45 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y25
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X45 Y45
-G4 P1000
-M84 Z
-G4 P1000
-G1 X25 Y45
-G4 P1000
-M84 Z
-G4 P1000
+
 
 
 

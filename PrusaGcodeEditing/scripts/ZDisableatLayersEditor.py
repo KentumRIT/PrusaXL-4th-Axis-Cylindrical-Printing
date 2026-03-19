@@ -23,10 +23,11 @@ def select_file():
     root.withdraw() # Hide root window
     
     # Get the documents filepath, open the file dialog box at documents, get selected file path
-    documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
+    # documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
+    dir = "D:\\Github Stuff\\PrusaXL-4th-Axis-Cylindrical-Printing"
     file_path = filedialog.askopenfilename(
         title="Select a File",
-        initialdir=documents_dir,
+        initialdir=dir,
         filetypes=(
             ("GCODE Files", "*.gcode"),
             ("Text Files", "*.txt"),
@@ -94,12 +95,18 @@ for line in contents[layer_indices[0]:layer_indices[-1]]:
         if any(tag in line for tag in (";TYPE:External perimeter", ";TYPE:Perimeter", ";TYPE:Solid infill", ";TYPE:Internal infill", ";TYPE:Top solid infill")):
             in_printed_section = True
             #add M84 Z before printing
+            edited_contents.append(f"M400\n")
+            edited_contents.append(f"G4 P100\n")
             edited_contents.append(f"M84 Z\n")
+            edited_contents.append(f"G4 P100\n")
     else:
         if any(tag in line for tag in (";WIPE", ";LAYER", ";TYPE:Custom")):
             in_printed_section = False
             #add M17 before Z move
-            edited_contents.append(f"M17\n")
+            #edited_contents.append(f"M400\n")
+            #edited_contents.append(f"G4 P100\n")
+            #edited_contents.append(f"M17\n")
+            #edited_contents.append(f"G4 P100\n")
 
     edited_contents.append(line)
 
