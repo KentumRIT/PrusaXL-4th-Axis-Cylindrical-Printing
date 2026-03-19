@@ -18,13 +18,51 @@ I printed a set of 5 towers with standard Prusa G-code. The print settings were 
 TODO: Measure control samples
 
 ### Test samples
-I printed test samples with modified G-code: `M84 Z` and `M17` were added to bracket each perimeter, external perimeter, infill, and solid infill print sequence such all movements during printing would have inactive Z-axis motors. The code I used for this modification can be found [here].
+I printed test samples with modified G-code: `M84 Z` and `M17` were added to bracket each perimeter, external perimeter, infill, and solid infill print sequence such all movements during printing would have inactive Z-axis motors. The code I used for this modification can be found [here](70mm%test%tower.gcode), with an example snippet here:
+```
+M84 Z
+;TYPE:Perimeter
+;WIDTH:0.499999
+G1 F2400
+G1 X28.407 Y331.593 E1.26128
+G1 X28.407 Y298.407 E1.26128
+G1 X61.593 Y298.407 E1.26128
+G1 X61.593 Y331.533 E1.259
+M204 P2500
+M204 T250
+G1 X62.05 Y332.05 F24000
+M204 T5000
+M204 P500
+;TYPE:External perimeter
+G1 F2400
+G1 X27.95 Y332.05 E1.29601
+G1 X27.95 Y297.95 E1.29601
+G1 X62.05 Y297.95 E1.29601
+G1 X62.05 Y331.99 E1.29373
+M204 P2500
+G1 E-.64 F2100
+M17
+```
 
-I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. My theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I modified the [G-code used](../Disabling-Motors-for-Switching/Z%20Disable%20Enable%20Test.gcode) to test if `M84` and `M17` were working to be the following repeated section
+I obseved the Z-axis motor with an oscilloscope during printing to verify that it was being properly disable, but it wasn't. Power was being delivered to the Z axis motor during printing (after the `M84 Z` G-code command). My initial theory is that the movement commands `G0/G1` automatically activate all steppers, even if the Z axis isn't used in the move. To verify this, I created G-code that moves the extruder in a square pattern and turns off the Z axis between moves with a 1s delay added between each command:
 ```
 M84 Z
 G4 P1000
-G1 X20 Y20
-G4 P100
+G1 X25 Y25
+G4 P1000
+M84 Z
+G4 P1000
+G1 X25 Y45
+G4 P1000
+M84 Z
+G4 P1000
+G1 X45 Y45
+G4 P1000
+M84 Z
+G4 P1000
+G1 X25 Y45
+G4 P1000
+M84 Z
+G4 P1000
 ```
-If `G0/G1` does actually enable all steppers, then the above code should disable the Z motors, wait 1s, enable the Z motors, then wait 1s.
+If `G0/G1` does actually enable all steppers, then the above code should disable the Z motors, wait 1s, enable the Z motors, then wait 1s repeatedly. However, the Z axis motor remains powered off for the entire section, which implies that `G1 X Y` isn't sufficient to cause the Z motor to turn back on. The only obvious differences then between the code snippet above from the test sample G-code and the test code I ran are the inclusion of `G1 F`, `G1 E`, and `M204` commands. I included these in the updated [G-code](Z%Enable%Via%G1.gcode).
