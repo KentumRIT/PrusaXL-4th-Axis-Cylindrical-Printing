@@ -43,4 +43,4 @@ As you can see above, the serial output works!
 Hijack the power supplied to the print fan of a docked relay to control relays which switch motor control.
 
 ### Critical issue!
-As far as I'm aware, there's no way to control a part fan or any other signals via G-code that could be hijacked to control a set of relays.
+As far as I'm aware, there's no way to control the part fan of a *docked* extruder or any other signals via G-code that could be hijacked to control a set of relays.
