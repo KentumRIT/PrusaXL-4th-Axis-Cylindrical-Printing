@@ -23,10 +23,11 @@ def select_file():
     root.withdraw() # Hide root window
     
     # Get the documents filepath, open the file dialog box at documents, get selected file path
-    documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
+    # documents_dir = os.path.join(os.path.expanduser("~"), "Documents")
+    dir = "D:\\Github Stuff\\PrusaXL-4th-Axis-Cylindrical-Printing"
     file_path = filedialog.askopenfilename(
         title="Select a File",
-        initialdir=documents_dir,
+        initialdir=dir,
         filetypes=(
             ("GCODE Files", "*.gcode"),
             ("Text Files", "*.txt"),
