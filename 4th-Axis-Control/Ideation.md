@@ -20,7 +20,7 @@ We need some way of controlling the 4th axis (θ axis) motor that will drive the
       - **[Unsolved]** describes challenges that haven't been solved and aren't yet being worked on.
     - Challenges in the **[Solved]**, **[Mitigated]**, or **[Unsolved]** states should be linked to a doc or folder containing documentation of the decisions made and work done.
 
-## Switching Z and θ axes
+## [Switching Z and θ axes](Switching-Z-and-Theta-Control)
 ### Description
 The PrusaXL firmware/hardware can already handle controlling XYZ steppers simultaneously through the basic `G0/G1` movement commands. We can simply switch the power from being delivered to the Z axis motor to the θ axis motor and vise versa in order to control the θ axis.
 
@@ -60,7 +60,7 @@ The PrusaXL has 5 toolheads, so we can just use the extruder stepper on one prin
 - **[Unsolved]** We need to find the relationship between extruder movement to θ axis movement.
 - **[Unsolved]** Does the PrusaXL hardware allow control of 5 steppers simultaneously?
 
-## Send Positional Data Via Serial
+## [Send Positional Data Via Serial](Theta-Control-Via-Serial)
 ### Description
 Before each movement command involving the θ axis, send a packet of serial data to an external microcontroller which can drive the θ axis motor.
 

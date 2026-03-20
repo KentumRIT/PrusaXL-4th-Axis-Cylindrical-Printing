@@ -36,7 +36,8 @@ Done printing file
 ```
 As you can see above, the serial output works!
 
-### TODO: Verify the ESP32 can read serial data from Prusa
+### Verify the ESP32 can recieve serial data from Prusa
+First, I wrote [some code](../../code/serial-communication-testing/) that would flash a hardware LED on the ESP32 when it recieved `Flash` via the serial line.
 
 ## Use the print fan of a docked extruder to do switching control
 ### Description
