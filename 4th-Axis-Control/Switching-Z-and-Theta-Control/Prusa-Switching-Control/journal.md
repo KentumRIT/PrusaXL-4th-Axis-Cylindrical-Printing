@@ -39,6 +39,10 @@ As you can see above, the serial output works!
 ### Verify the ESP32 can recieve serial data from Prusa
 First, I wrote [some code](../../code/serial-communication-testing/) that would flash a hardware LED on the ESP32 when it recieved `Flash` via the serial line.
 
+I then wrote [G-code](serial%20test.gcode) to blink the LED via serial. I first connected the printer to my laptop to read its serial output to verify the G-code was working as expected, which it was. When plugging the ESP32 into the Prusa, it did not power on, indicating that USB-C on the back of the prusa doesn't provide power to peripheral components. For the sake of running the test, I connected the ESP32 to a 5V power supply via the Vin and Gnd pins. The ESP32 did not respond to the serial data from the printer.
+
+The issue is likely that the ESP32 is not and can't be a USB host. I need an ESP32 S2 to do that. I'll try
+
 ## Use the print fan of a docked extruder to do switching control
 ### Description
 Hijack the power supplied to the print fan of a docked relay to control relays which switch motor control.

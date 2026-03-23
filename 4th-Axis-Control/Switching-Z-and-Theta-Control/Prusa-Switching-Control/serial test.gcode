@@ -43,56 +43,18 @@ M142 S36		; set cooler temperature and don't wait
 M107			; turn off print cooling fan
 
 ; Serial print a bunch
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
-M118 Hello World
-G4 P200
+M118 <test>
+G4 P2000
+M118 <test>
+G4 P2000
+M118 <test>
+G4 P2000
+M118 <test>
+G4 P2000
+M118 <test>
+G4 P2000
+M118 <test>
+G4 P2000
 
 
 

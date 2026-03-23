@@ -40,6 +40,7 @@ The PrusaXL firmware/hardware can already handle controlling XYZ steppers simult
 - **[Unsolved]** We need to match the system characteristics of the θ to the Z axis so that the Z axis motor driver tuning works for both the Z and θ axes.
 - **[Unsolved]** It's possible the Z axis drive controller doesn't have enough power for the θ axis.
 - **[Unsolved]** We need to find the relationship between Z axis movement to θ axis movement.
+- **[Unsolved]** Need to find a way to power ESP32 (USB-C on back of Prusa doesn't provide power)
 
 ## Hijack Extruder Stepper Motor
 ### Description
@@ -74,3 +75,4 @@ Before each movement command involving the θ axis, send a packet of serial data
 
 ### Challenges
 - **[Unsolved]** Need to find way to sync θ axis and XYZ axes when providing only a position and speed command via serial.
+- **[Unsolved]** Need to find a way to power ESP32 (USB-C on back of Prusa doesn't provide power)
