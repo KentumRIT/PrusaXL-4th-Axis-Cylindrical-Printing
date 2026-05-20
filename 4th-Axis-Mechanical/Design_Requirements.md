@@ -7,4 +7,4 @@ We want a reasonable printing speed of ~60 mm/s at the surface of the mandrel. T
 180.46 rpm or 18.898 rad/s = 60 [mm/s] / 6.35 [mm]
 
 ### Repeatability
-We want a linear repeatability within our resolution, so same angular value of 0.143° ideally
+We want a linear repeatability within our resolution, so same angular value of 0.286° ideally
