@@ -5,7 +5,7 @@ import re
 
 # Print parameters
 first_layer_repeat = 2          # Number of times to repeat the first layer, with 0 printing the first layer once
-max_x_pos = 299                 # Max position the x axis can go to before crashing
+max_x_pos = 332                 # Max position the x axis can go to before crashing
 layer_temps = [260,235,220]     # Temperatures for layers to print in C. The last temp in list used for all subsequent layers
 z_offset = 28.4                 # Height of the mandrels off the print bed in mm
 

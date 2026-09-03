@@ -8,7 +8,7 @@ We need to generate g-code that is planar with respect to a cylindrical coordina
 - Cylindrical slicing: [paper](https://www.sciencedirect.com/science/article/pii/S2212827117311472?via%3Dihub)
 - Planar cylindrical slicing, (flat to curved) [paper](https://accscience.com/journal/IJB/articles/online_first/4756)
 - Company that does 4th axis cylindrical printing [link](https://www.cosineadditive.com/en/blog/2022/12/15/additive-lathe-slicing)
-
+- Cylindrical Slicer [github](https://github.com/vandenbergheluke/cylindrical-slicer)
 
 # Potential Solutions
 ## Most recent attempted solution
